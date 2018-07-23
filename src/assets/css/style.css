@@ -1,9 +1,28 @@
 body {
   font-size: 100%;
+  background: #fafafa;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 .header {
-  background: #d9d9d9;
-  height: 60px;
+  background: #fff;
+  height: 70px;
+  box-shadow: 0px 0px 10px #888888;
+}
+.header-dropdown {
+  padding-top: 41px;
+}
+a {
+  color: #555;
+}
+.logo {
+  background: url("../images/helping_ears_logo1.png");
+  width: 140px;
+  height: 70px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  /* margin-top: 7px; */
+  margin-left: 10px;
+  display: inline-block;
 }
 .section {
   width: 96%;
@@ -11,23 +30,26 @@ body {
 }
 .tab {
   color: #404040;
-  line-height: 60px;
+  line-height: 70px;
   /* height: 60px; */
 }
 .tab-item {
   display: inline-block;
-  padding: 7px 40px;
+  padding: 30px 10px 0px 10px;
   font-size: 16px;
-  height: 60px;
+  height: 70px;
+  border-bottom: 2px solid transparent;
+  color: rgba(0, 0, 0, 0.87);
+  font-family: Graphik;
 }
 .tab-item.active {
-  font-weight: bold;
+  border-bottom: 2px solid #7500c0;
 }
 .observer {
   margin-top: 30px;
 }
 .observer-text {
-  color: #70ad47;
+  color: #28c4a9;
   font-size: 30px;
 }
 .observe-bar {
@@ -48,42 +70,54 @@ body {
   display: none;
 }
 .video {
-  margin-top: 30px;
+  margin-top: 20px;
+}
+.audio-series-graph {
+  padding-top: 20px;
+}
+.main-video.border-trans {
+  border-top: 5px solid transparent;
 }
 .main-video {
-  background: #f2f2f2;
-  height: 430px;
+  background: #fff;
+  height: 450px;
   position: relative;
+  border-top: 5px solid #28c4a9;
 }
 .audio {
-  background: #f2f2f2;
-  height: 180px;
+  background: #fff;
+  height: 190px;
   position: relative;
+  border-top: 5px solid transparent;
 }
-
+.time-series-graph {
+  padding-top: 20px;
+}
 .audio-video {
-  background: #f2f2f2;
+  /* background: #f2f2f2; */
   height: 300px;
   position: relative;
 }
 .activity {
-  background: #f2f2f2;
-  height: 280px;
-  margin-top: 10px;
+  background: #fff;
+  height: 190px;
+  /* margin-top: 10px; */
   position: relative;
 }
 .video-text {
-  text-align: center;
-  color: #7f7f7f;
-  padding: 15px;
-  font-size: 18px;
+  /* padding: 5px; */
+  height: 30px;
+  color: #4a4a4a;
+  font-family: Arial;
+  font-size: 16px;
+  font-weight: bold;
 }
 .accuracy-bottom {
-  font-size: 16px;
-  color: #404040;
+  font-size: 12px;
+  color: #4a4a4a;
   position: absolute;
   bottom: 10px;
-  height: 25px;
+  /* height: 25px; */
   right: 20px;
 }
 .dropdown-row {
@@ -132,24 +166,36 @@ body {
   background: 0 0;
   border: 0;
 }
+.living-room {
+  /* position: relative; */
+  /* top: 36px; */
+  display: inline-block;
+}
+.living-room .dropdown {
+  display: inline-block;
+  border-bottom: 1px solid #c1c1c1;
+  margin: 0px 12px;
+}
 .living-room .btn {
   background: transparent;
-  color: #404040;
-  font-size: 18px;
+  color: #000;
+  font-size: 12px;
+  padding: 2px 0px;
   font-weight: bold;
+  /* border-bottom: 1px solid #000; */
 }
 .living-room .dropdown-toggle::after {
-  border-top: 8px solid;
-  border-right: 8px solid transparent;
-  border-left: 8px solid transparent;
-  color: #7f7f7f;
+  border-top: 5px solid;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  color: #000;
 }
 
 .living-room .dropdown-menu {
-  font-size: 16px;
+  font-size: 12px;
 }
 .living-room .dropdown-item {
-  padding: 10px 20px;
+  padding: 7px 20px;
 }
 .living-room .dropdown-item:hover {
   background: #eee;
@@ -157,14 +203,16 @@ body {
 .modal-applied {
   /* float: right; */
   display: inline-block;
-  width: 100%;
-  text-align: right;
+  /* position: relative; */
+  /* top: 36px; */
+  /* text-align: right; */
 }
 .modal-applied .btn {
   background: transparent;
-  color: #404040;
-  font-size: 13px;
+  color: #000;
+  font-size: 12px;
   font-weight: bold;
+  padding: 2px 0px;
 }
 .modal-applied .dropdown-toggle::after {
   border-top: 5px solid;
@@ -175,10 +223,6 @@ body {
 
 .modal-applied .dropdown-menu {
   font-size: 12px;
-  right: 0px;
-  left: -19px;
-  /* width: 40%; */
-  /* min-width: 200px; */
 }
 .modal-applied .dropdown-item {
   padding: 7px 20px;
@@ -212,8 +256,10 @@ body {
 }
 .modal-applied-dropdown {
   position: relative;
-  right: 0px;
-  width: 30%;
+  /* right: 0px; */
+  /* width: 30%; */
+  border-bottom: 1px solid #c1c1c1;
+  margin: 0px 12px;
 }
 .play-button {
   position: absolute;
@@ -221,9 +267,12 @@ body {
   top: 5px;
   font-size: 15px;
   background: #ddd;
-  padding: 10px 20px;
+  padding: 7px 20px;
   border-radius: 5px;
   cursor: pointer;
+}
+.video-area {
+  margin-top: 53px;
 }
 .pause-button {
   position: absolute;
@@ -231,7 +280,7 @@ body {
   top: 5px;
   font-size: 15px;
   background: #ddd;
-  padding: 10px 20px;
+  padding: 7px 20px;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -286,6 +335,9 @@ text {
 rect {
   fill: #f2f2f2;
 }
+.av-audio-series-graph {
+  padding-top: 20px;
+}
 .notification-popup {
   background: #ed7d31;
   color: #fff;
@@ -294,7 +346,7 @@ rect {
   border-radius: 5px;
   position: absolute;
   line-height: 40px;
-  top: 10%;
+  top: 3%;
   left: 35%;
   text-align: center;
   font-size: 16px;
@@ -325,14 +377,14 @@ rect {
   }
 }
 .blink-box {
-  width: 624px;
-  height: 359px;
+  width: 100%;
+  /* height: 359px; */
   position: absolute;
-  margin-left: 48px;
-  top: 46px;
+  /* margin-left: 48px; */
+  top: -5px;
 }
 .blink {
-  border: 10px solid #ed7d31;
+  border-top: 5px solid #ed7d31;
   -webkit-animation: blinker 0.3s infinite;
   -moz-animation: blinker 0.3s infinite;
   animation: blinker 0.3s infinite;

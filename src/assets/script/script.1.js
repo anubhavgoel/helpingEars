@@ -322,10 +322,11 @@ $(document).ready(function() {
       .show();
 
     if (video) {
+      $(".main-video").addClass("border-trans");
       $(".blink-box").addClass("blink");
     }
     if (audio) {
-      $(".audio-area").addClass("blink");
+      //$(".audio-area").addClass("blink");
     }
     $(".observe-percentage").show();
     $(".videoaccuracy").show();
@@ -355,7 +356,8 @@ $(document).ready(function() {
     }, 400);
     $(".audio-distress").hide();
     $(".blink-box").removeClass("blink");
-    $(".audio-area").removeClass("blink");
+    //$(".audio-area").removeClass("blink");
+    $(".main-video").removeClass("border-trans");
     $(".videoaccuracy").hide();
     $(".observer-text")
       .html("Everything Looks Good")
