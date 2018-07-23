@@ -1,7 +1,7 @@
 {
-  "name": "helpingEars",
-  "short_name": "helpingEars",
-  "theme_color": "#1976d2",
+  "name": "Helping Ears",
+  "short_name": "Helping Ears",
+  "theme_color": "#d7007c",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "/",

@@ -172,10 +172,17 @@
 </div>
 
 <div class="mobile2">
+  <div style=" display: flex;justify-content: center;">
+    <img style="height: 50%;width: 50%;" src="assets/icons/he.png">
+  </div>
   <br>
   <br>
-  <button class="button" (click)="auth.googleLogin()">Login With Gmail</button>
+  <div style=" display: flex;justify-content: center;">
+    <button type="button" class="btn btn-primary" (click)="auth.googleLogin()">Login With Gmail</button>
+  </div>
   <br>
   <br>
-  <button class="button" (click)="auth.signOut()">Logout</button>
+  <div style=" display: flex;justify-content: center;">
+    <button type="button" class="btn btn-primary" (click)="auth.signOut()">Logout</button>
+  </div>
 </div>

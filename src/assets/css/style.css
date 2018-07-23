@@ -303,13 +303,13 @@ a {
 
 .av-line1 {
   fill: none;
-  stroke: #ed7d31 !important;
+  stroke: #ac3973 !important;
   stroke-width: 2;
 }
 
 .av-line {
   fill: none;
-  stroke: #404040 !important;
+  stroke: #1f3d7a !important;
   stroke-width: 2;
 }
 .axis path,
@@ -337,6 +337,9 @@ rect {
 }
 .av-audio-series-graph {
   padding-top: 20px;
+}
+.av-video-series-graph {
+  margin-top: -25px;
 }
 .notification-popup {
   background: #ed7d31;
