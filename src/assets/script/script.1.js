@@ -178,147 +178,67 @@ $(document).ready(function() {
 
   var distress = [
     [
-      8,
-      11,
+      27,
+      34,
       true,
       true,
       true,
       true,
-      "./assets/images/img_avatar.png",
+      "./assets/images/Major_Destess.png",
       "8AM",
       "Living Room",
-      "Banda Gir gya aur marne wala hai",
+      "",
       0
     ],
     [
-      27,
-      29,
+      63,
+      64,
       true,
       true,
       true,
       true,
-      "./assets/images/img_avatar.png",
+      "./assets/images/Major_Destress1.png",
       "12AM",
-      "Living Room",
-      "ek aur gira",
+      "",
+      "",
       1
     ],
     [
-      46,
-      48,
+      76,
+      78,
       true,
       true,
       true,
       true,
-      "./assets/images/img_avatar.png",
+      "./assets/images/Minor_Destress.png",
       "1AM",
       "Living Room",
-      "bachaooooooooooooooooooo",
+      "",
       2
     ],
     [
-      57,
-      58,
+      81,
+      83,
       true,
       true,
       true,
       true,
-      "./assets/images/img_avatar.png",
+      "./assets/images/Minor_Distress.png",
       "4AM",
       "Living Room",
-      "OMGGGGGGGGGGGGG",
+      "",
       3
-    ],
-    [
-      69,
-      71,
-      true,
-      true,
-      true,
-      true,
-      "./assets/images/img_avatar.png",
-      "7AM",
-      "Living Room",
-      "reuqired help",
-      4
-    ],
-    [
-      82,
-      83,
-      true,
-      true,
-      true,
-      true,
-      "./assets/images/img_avatar.png",
-      "8AM",
-      "Living Room",
-      "Banda Gir gya aur marne wala hai",
-      5
-    ],
-    [
-      83,
-      84,
-      true,
-      true,
-      true,
-      true,
-      "./assets/images/img_avatar.png",
-      "7AM",
-      "Living Room",
-      "Banda Gir gya aur marne wala hai",
-      6
-    ],
-    [
-      92,
-      95,
-      true,
-      true,
-      true,
-      true,
-      "./assets/images/img_avatar.png",
-      "9AM",
-      "Living Room",
-      "DHMamammaaamam",
-      7
-    ],
-    [
-      97,
-      98,
-      true,
-      true,
-      true,
-      true,
-      "./assets/images/img_avatar.png",
-      "8AM",
-      "Living Room",
-      "Banda Gir gya aur marne wala hai",
-      8
-    ],
-    [
-      104,
-      108,
-      true,
-      true,
-      true,
-      true,
-      "./assets/images/img_avatar.png",
-      "8AM",
-      "Living Room",
-      "bassssssssssssssssss",
-      9
     ]
   ];
 
   function distressObserver(video, audio, msg) {
-    var oldlady_video1 = document.getElementById("oldlady_video");
-    oldlady_video1.pause();
     $(".observer-text")
       .html("Distress Observed")
       .addClass("red-color");
     $(".observer-bar").addClass("red-backgroundcolor");
     $(".notification-popup")
       .append(
-        `<span class="notificationMsg">Notification Sent: ${msg}
+        `<span class="notificationMsg">Notification Sent ${msg}
   </span>`
       )
       .show();
@@ -348,14 +268,14 @@ $(document).ready(function() {
     clearInterval(interaudio);
     //oldlady_video1.pause();
     //setTimeout(function() {
-    //oldlady_video1.play();
-    // inter = setInterval(function() {
-    //   updateData();
-    // }, 400);
+    // oldlady_video1.play();
+    inter = setInterval(function() {
+      updateData();
+    }, 400);
 
-    // interaudio = setInterval(function() {
-    //   updateData1();
-    // }, 400);
+    interaudio = setInterval(function() {
+      updateData1();
+    }, 400);
     $(".audio-distress").hide();
     $(".blink-box").removeClass("blink");
     //$(".audio-area").removeClass("blink");
@@ -431,7 +351,7 @@ $(document).ready(function() {
       accuracy: "80%",
       date: curDate(),
       time: timeNow(),
-      imageURL: "./assets/images/Major_Destress1.PNG",
+      imageURL: "./assets/images/Major_Destess.PNG",
       notifications: [
         {
           level: "Level 3",
@@ -640,7 +560,7 @@ $(document).ready(function() {
         //start the blink;
         element[2] = false;
         notificationObj = {
-          title: element[9],
+          title: "Fall detected in the living room at " + timeNow(),
           body: `Please check in ${element[8]}`,
           icon: element[6],
           click_action: "Immediate Attention"
@@ -675,14 +595,28 @@ $(document).ready(function() {
     return output;
   };
 
+  var lastUpdateTime2 = +new Date();
+
+  var GenData2 = function(N1, lastTime) {
+    var output = [];
+    for (var i = 0; i < N1; i++) {
+      output.push({ value: Math.random() * 75, timestamp: lastTime });
+      lastTime = lastTime + 1000;
+    }
+    return output;
+  };
+
   var globalData1;
+  var globalData2;
   var dataIntervals1 = 1;
 
   // plot the original data by retrieving everything from time 0
   data1 = GenData1(100, lastUpdateTime1);
 
-  data2 = GenData1(200, lastUpdateTime1);
+  data2 = GenData2(200, lastUpdateTime2);
+
   lastUpdateTime1 = data1[data1.length - 1].timestamp;
+  lastUpdateTime2 = data2[data2.length - 1].timestamp;
 
   globalData1 = data1;
   globalData2 = data2;
@@ -696,6 +630,17 @@ $(document).ready(function() {
   var y = d3.scale.linear().range([height1, 0]);
 
   x.domain(
+    d3.extent(globalData2, function(d) {
+      return d.timestamp;
+    })
+  );
+  y.domain(
+    d3.extent(globalData2, function(d) {
+      return d.value;
+    })
+  );
+
+  x.domain(
     d3.extent(globalData1, function(d) {
       return d.timestamp;
     })
@@ -706,6 +651,15 @@ $(document).ready(function() {
     })
   );
 
+  var valueline2 = d3.svg
+    .line()
+    .x(function(d) {
+      return x(d.timestamp);
+    })
+    .y(function(d) {
+      return y(d.value);
+    });
+
   var valueline1 = d3.svg
     .line()
     .x(function(d) {
@@ -714,6 +668,7 @@ $(document).ready(function() {
     .y(function(d) {
       return y(d.value);
     });
+
   var svg1 = d3
     .select(".audio-series-graph")
     .append("svg")
@@ -762,33 +717,44 @@ $(document).ready(function() {
     .append("path") // Add the valueline path
     .datum(globalData2)
     .attr("class", "av-line1")
-    .attr("d", valueline1);
+    .attr("d", valueline2);
 
   //var panMeasure = 0;
   var oldScale1 = 1;
   var globalOffset1 = 0;
+  var globalOffset2 = 0;
   var panOffset1 = 0;
+  var panOffset2 = 0;
 
   //////////////////////////////////////////////////////////////
 
-  var N1 = 10;
+  var N1 = 100;
   //var dx = 0;
   function updateData1() {
     var newData = GenData1(N1, lastUpdateTime1);
+    var newData2 = GenData2(N1, lastUpdateTime1);
+
     lastUpdateTime1 = newData[newData.length - 1].timestamp;
+    lastUpdateTime2 = newData2[newData2.length - 1].timestamp;
 
     for (var i = 0; i < newData.length; i++) {
       globalData1.push(newData[i]);
     }
+    for (var i = 0; i < newData2.length; i++) {
+      globalData2.push(newData2[i]);
+    }
     //console.log(globalOffset);
     globalOffset1 += newData.length;
+    globalOffset2 += newData2.length;
+
     refreshData1();
     refreshData2();
   }
 
   function refreshData2() {
-    var offset = Math.max(0, globalOffset1 + panOffset1);
-    var graphData = globalData1.slice(offset, offset + 100);
+    var offset2 = Math.max(0, globalOffset2 + panOffset2);
+
+    var graphData = globalData2.slice(offset2, offset2 + 100);
 
     x.domain(
       d3.extent(graphData, function(d) {
@@ -804,7 +770,7 @@ $(document).ready(function() {
     d3.select(".av-line1")
       .datum(graphData)
       .attr("class", "av-line1")
-      .attr("d", valueline1(graphData))
+      .attr("d", valueline2(graphData))
       .attr("stroke", "#ed7d31")
       .attr("stroke-width", "2")
       .attr("fill", "none");
