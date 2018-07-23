@@ -310,6 +310,8 @@ $(document).ready(function() {
   ];
 
   function distressObserver(video, audio, msg) {
+    var oldlady_video1 = document.getElementById("oldlady_video");
+    oldlady_video1.pause();
     $(".observer-text")
       .html("Distress Observed")
       .addClass("red-color");
@@ -337,23 +339,23 @@ $(document).ready(function() {
     window.dispatchEvent(event);
   }
   function distressNotObserver(video, audio) {
-    var oldlady_video1 = document.getElementById("oldlady_video");
+    //var oldlady_video1 = document.getElementById("oldlady_video");
 
     clearInterval(inter);
     clearInterval(interaudio);
     //   $(".videoaccuracy").show();
     clearInterval(inter);
     clearInterval(interaudio);
-    oldlady_video1.pause();
+    //oldlady_video1.pause();
     //setTimeout(function() {
-    oldlady_video1.play();
-    inter = setInterval(function() {
-      updateData();
-    }, 400);
+    //oldlady_video1.play();
+    // inter = setInterval(function() {
+    //   updateData();
+    // }, 400);
 
-    interaudio = setInterval(function() {
-      updateData1();
-    }, 400);
+    // interaudio = setInterval(function() {
+    //   updateData1();
+    // }, 400);
     $(".audio-distress").hide();
     $(".blink-box").removeClass("blink");
     //$(".audio-area").removeClass("blink");
