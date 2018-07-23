@@ -372,20 +372,34 @@ $(document).ready(function() {
     //  }, 500);
   }
 
+  var curDate = function() {
+    var currentDate = new Date();
+    var day = currentDate.getDate();
+    var month = currentDate.getMonth() + 1;
+    var year = currentDate.getFullYear();
+    return day + "-" + month + "-" + year;
+  };
+  function timeNow() {
+    var d = new Date(),
+      h = (d.getHours() < 10 ? "0" : "") + d.getHours(),
+      m = (d.getMinutes() < 10 ? "0" : "") + d.getMinutes();
+    var ampm = h >= 12 ? "PM" : "AM";
+    return h + ":" + m + " " + ampm;
+  }
   var configuration = [
     {
-      reportTitle: "Fall in Room02 20-07-2018 ",
-      roomNo: "Room02",
+      reportTitle: "Fall in Common Room " + curDate(),
+      roomNo: "Common Room",
       eventType: "Level 3",
       category: "Fall",
       accuracy: "80%",
-      date: "20.07.18",
-      time: "5:30pm",
-      imageURL: "assets/images/Picture1.png",
+      date: curDate(),
+      time: timeNow(),
+      imageURL: "./assets/images/Major_Destess.PNG",
       notifications: [
         {
           level: "Level 3",
-          notificationSentTime: "20.07.18 5:40pm",
+          notificationSentTime: curDate() + " " + timeNow(),
           notificationSentOptions: [
             { contactType: "Email sent to ", details: "admin@helpingears.com" },
             {
@@ -396,7 +410,75 @@ $(document).ready(function() {
         },
         {
           level: "Level 2",
-          notificationSentTime: "20.07.18 5:40pm",
+          notificationSentTime: curDate() + " " + timeNow(),
+          notificationSentOptions: [
+            { contactType: "Email sent to ", details: "admin@helpingears.com" },
+            {
+              contactType: "Push notifications sent to ",
+              details: "phone11X011 "
+            }
+          ]
+        }
+      ]
+    },
+    {
+      reportTitle: "Fall in Common Room " + curDate(),
+      roomNo: "Common Room",
+      eventType: "Level 3",
+      category: "Fall",
+      accuracy: "80%",
+      date: curDate(),
+      time: timeNow(),
+      imageURL: "./assets/images/Major_Destress1.PNG",
+      notifications: [
+        {
+          level: "Level 3",
+          notificationSentTime: curDate() + " " + timeNow(),
+          notificationSentOptions: [
+            { contactType: "Email sent to ", details: "admin@helpingears.com" },
+            {
+              contactType: "Push notifications sent to ",
+              details: "phone11X011 "
+            }
+          ]
+        },
+        {
+          level: "Level 2",
+          notificationSentTime: curDate() + " " + timeNow(),
+          notificationSentOptions: [
+            { contactType: "Email sent to ", details: "admin@helpingears.com" },
+            {
+              contactType: "Push notifications sent to ",
+              details: "phone11X011 "
+            }
+          ]
+        }
+      ]
+    },
+    {
+      reportTitle: "Fall in Common Room " + curDate(),
+      roomNo: "Common Room",
+      eventType: "Level 2",
+      category: "Fall",
+      accuracy: "80%",
+      date: curDate(),
+      time: timeNow(),
+      imageURL: "./assets/images/Minor_Destress.PNG",
+      notifications: [
+        {
+          level: "Level 2",
+          notificationSentTime: curDate() + " " + timeNow(),
+          notificationSentOptions: [
+            { contactType: "Email sent to ", details: "admin@helpingears.com" },
+            {
+              contactType: "Push notifications sent to ",
+              details: "phone11X011 "
+            }
+          ]
+        },
+        {
+          level: "Level 1",
+          notificationSentTime: curDate() + " " + timeNow(),
           notificationSentOptions: [
             { contactType: "Email sent to ", details: "admin@helpingears.com" },
             {
@@ -421,7 +503,7 @@ $(document).ready(function() {
       for (var j = 0; j < localLength; j++) {
         notificationSubTemplate = `${notificationSubTemplate}<div class="row report-row">
                                                 <div class="col-md-12">
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-4">
                                                         <span>${
                                                           configuration
                                                             .notifications[i]
@@ -465,7 +547,7 @@ $(document).ready(function() {
 
     $(
       ".left-container"
-    ).parent().append(`<div id="${index}" class="col-md-10 right-container report-hide">
+    ).parent().append(`<div id="${index}" class="col-md-9 right-container report-hide">
     <div class="row">
         <div class="col-md-12">
             <div class="report-title">IN - ${configuration.reportTitle}</div>
@@ -477,14 +559,14 @@ $(document).ready(function() {
             <div class="col-md-2 report-padding">
                 <div class="report-text-container">
                     <span class="report-label">Category – </span>
-                    <span>Fail${configuration.category}</span>
+                    <span>${configuration.category}</span>
                 </div>
                 <div class="report-text-container">
                     <span class="report-label">Event type-</span>
                     <span>${configuration.eventType}</span>
                 </div>
                 <div class="report-text-container">
-                    <span class="report-label">Accuracy –</span>
+                    <span class="report-label">Probability –</span>
                     <span>${configuration.accuracy}</span>
                 </div>
                 <div class="report-text-container">
