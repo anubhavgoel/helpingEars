@@ -48,8 +48,10 @@ function playaudio(){
 function togglePlay() {
   if (sound.isPlaying()) {
     sound.pause();
+	 //document.getElementById("oldlady_video").pause();
   } else {
     sound.play();
+	// document.getElementById("oldlady_video").play();
 	//draw();
   }
 }
@@ -77,39 +79,19 @@ $(document).ready(function() {
 
   $(".play-button").on("click", function() {
     oldlady_video.play();
-    playaudio();
-    //oldlady_audio.play();
-    clearInterval(inter);
-    inter = setInterval(function() {
-      updateData();
-    }, 400);
-    clearInterval(interaudio);
-    interaudio = setInterval(function() {
-      updateData1();
-    }, 400);
+    //playaudio();
+   
     $(".videoaccuracy").hide();
     $(".observer-text")
       .html("Everything Looks Good")
       .removeClass("red-color");
     $(".observer-bar").removeClass("red-backgroundcolor");
-    setTimeout(function() {
-      //   $(".observer-text")
-      //     .html("Distress Observed")
-      //     .addClass("red-color");
-      //   $(".observer-bar").addClass("red-backgroundcolor");
-      //   $(".notification-popup").show();
-      //   setTimeout(function() {
-      //     $(".notification-popup").hide();
-      //   }, 1000);
-    }, 7300);
+   
   });
   $(".pause-button").on("click", function() {
     oldlady_video.pause();
-    playaudio();
-    //oldlady_audio.play();
-    clearInterval(inter);
-
-    clearInterval(interaudio);
+   // playaudio();
+   
   });
   /*----------video end event------------*/
   oldlady_video.addEventListener("ended", function(e) {
@@ -118,124 +100,7 @@ $(document).ready(function() {
     clearInterval(interaudio);
   });
 
-  /*--------Time series chart--------*/
-
-  var lineData = [
-    { x: 1, y: 20 },
-    { x: 80, y: 80 },
-    { x: 160, y: 40 },
-    { x: 240, y: 160 },
-    { x: 320, y: 20 },
-    { x: 400, y: 240 }
-  ];
-  var self = this;
-  var oldScale = 1;
-  var globalOffset = 0;
-  var panOffset = 0;
-  function updateData() {
-    var newData = GenData(10, 100);
-    lastUpdateTime = newData[newData.length - 1].x;
-
-    for (var i = 0; i < newData.length; i++) {
-      lineData.push(newData[i]);
-    }
-    //console.log(globalOffset);
-    globalOffset += newData.length;
-    refreshData();
-  }
-
-  function refreshData() {
-    var offset = Math.max(0, globalOffset + panOffset);
-    var graphData = lineData.slice(offset, offset + 100);
-
-    d3.svg
-      .line()
-      .x(function(d) {
-        return d.x;
-      })
-      .y(function(d) {
-        return d.y;
-      })
-      .interpolate("cardinal");
-    //svg.select(".x.axis").call(xAxis);
-
-    x1 = graphData[0].y;
-    x2 = graphData[graphData.length - 1].y;
-    //dx = (x(x1) - x(x2)); // dx needs to be cummulative
-
-    var line = svg
-      .append("path")
-      .attr("d", lineFunction(lineData))
-      .attr("stroke-width", 3)
-      .attr("stroke", "url(#svgGradient)")
-      .attr("fill", "none");
-  }
-  function GenData(N, lastTime) {
-    var output = [];
-    for (var i = 0; i < N; i++) {
-      output.push({ y: Math.random() * 100, x: lastTime });
-      lastTime = lastTime + 10;
-    }
-    return output;
-  }
-  lineData = GenData(100, 10);
-  var lineFunction = d3.svg
-    .line()
-    .x(function(d) {
-      return d.x;
-    })
-    .y(function(d) {
-      return d.y;
-    })
-    .interpolate("cardinal");
-
-  var svg = d3
-    .select(".time-series-graph")
-    .append("svg")
-    .attr("width", 480)
-    .attr("height", 100);
-
-  var defs = svg.append("defs");
-  var gradient = defs
-    .append("linearGradient")
-    .attr("id", "svgGradient")
-    .attr("x1", "100%")
-    .attr("x2", "100%")
-    .attr("y1", "0%")
-    .attr("y2", "100%");
-  gradient
-    .append("stop")
-    .attr("class", "start")
-    .attr("offset", "10%")
-    .attr("stop-color", "red")
-    .attr("stop-opacity", 1);
-  gradient
-    .append("stop")
-    .attr("class", "end")
-    .attr("offset", "20%")
-    .attr("stop-color", "#404040")
-    .attr("stop-opacity", 1);
-
-  var line = svg
-    .append("path")
-    .attr("d", lineFunction(lineData))
-    .attr("stroke-width", 3)
-    .attr("stroke", "url(#svgGradient)")
-    .attr("fill", "none");
-
-  /*---------------------- capturing video time----------------------
-  var distress = [
-    [2, 4, true, true, true, true],
-	[4, 6, true, true, true, true],
-	[8, 10, true, true, true, true],
-	  [20, 24, true, true, true, true],
-	[34, 36, true, true, true, true],
-	[48, 50, true, true, true, true],
-	[58, 61, true, true, true, true],
-	[65, 69, true, true, true, true],
-	[72, 75, true, true, true, true]
-  ];*/
-
+ 
   var distress = [
     [
       27,
@@ -326,21 +191,11 @@ $(document).ready(function() {
   function distressNotObserver(video, audio) {
     //var oldlady_video1 = document.getElementById("oldlady_video");
 
-    clearInterval(inter);
-    clearInterval(interaudio);
+   
     //   $(".videoaccuracy").show();
-    clearInterval(inter);
-    clearInterval(interaudio);
+   
     //oldlady_video1.pause();
-    //setTimeout(function() {
-    // oldlady_video1.play();
-    inter = setInterval(function() {
-      updateData();
-    }, 400);
-
-    interaudio = setInterval(function() {
-      updateData1();
-    }, 400);
+    
     $(".audio-distress").hide();
     $(".blink-box").removeClass("blink");
     //$(".audio-area").removeClass("blink");
@@ -382,7 +237,7 @@ $(document).ready(function() {
       accuracy: "80%",
       date: curDate(),
       time: timeNow(),
-      imageURL: "./assets/images/Major_Destess.PNG",
+      imageURL:   "https://firebasestorage.googleapis.com/v0/b/helping-ears.appspot.com/o/1.png?alt=media&token=556d3b21-273e-4fd3-819e-723d97b9bc16",
       notifications: [
         {
           level: "Level 3",
@@ -416,7 +271,7 @@ $(document).ready(function() {
       accuracy: "80%",
       date: curDate(),
       time: timeNow(),
-      imageURL: "./assets/images/Major_Destess.PNG",
+      imageURL:"https://firebasestorage.googleapis.com/v0/b/helping-ears.appspot.com/o/2.png?alt=media&token=3301bc5b-50e9-45a2-b5ea-a3c9b2f47c52",
       notifications: [
         {
           level: "Level 3",
@@ -450,7 +305,41 @@ $(document).ready(function() {
       accuracy: "80%",
       date: curDate(),
       time: timeNow(),
-      imageURL: "./assets/images/Minor_Destress.PNG",
+      imageURL:  "https://firebasestorage.googleapis.com/v0/b/helping-ears.appspot.com/o/3.png?alt=media&token=514fdd6f-dfea-4a79-a693-38855744c562",
+      notifications: [
+        {
+          level: "Level 2",
+          notificationSentTime: curDate() + " " + timeNow(),
+          notificationSentOptions: [
+            { contactType: "Email sent to ", details: "admin@helpingears.com" },
+            {
+              contactType: "Push notifications sent to ",
+              details: "phone11X011 "
+            }
+          ]
+        },
+        {
+          level: "Level 1",
+          notificationSentTime: curDate() + " " + timeNow(),
+          notificationSentOptions: [
+            { contactType: "Email sent to ", details: "admin@helpingears.com" },
+            {
+              contactType: "Push notifications sent to ",
+              details: "phone11X011 "
+            }
+          ]
+        }
+      ]
+    },
+	{
+      reportTitle: "Fall in Common Room " + curDate(),
+      roomNo: "Common Room",
+      eventType: "Level 2",
+      category: "Fall",
+      accuracy: "80%",
+      date: curDate(),
+      time: timeNow(),
+      imageURL:"https://firebasestorage.googleapis.com/v0/b/helping-ears.appspot.com/o/4.png?alt=media&token=acf22790-ddb7-4594-a28b-9bd698ac0e22",
       notifications: [
         {
           level: "Level 2",
@@ -653,230 +542,8 @@ $(document).ready(function() {
   }
   $("#oldlady_video").on("timeupdate", onTimeUpdate);
   /*-------------------- drawing audio graph--------------------*/
-  var lastUpdateTime1 = +new Date();
-
-  var GenData1 = function(N1, lastTime) {
-    var output = [];
-    for (var i = 0; i < N1; i++) {
-      output.push({ value: Math.random() * 100, timestamp: lastTime });
-      lastTime = lastTime + 1000;
-    }
-    return output;
-  };
-
-  var lastUpdateTime2 = +new Date();
-
-  var GenData2 = function(N1, lastTime) {
-    var output = [];
-    for (var i = 0; i < N1; i++) {
-      output.push({ value: Math.random() * 75, timestamp: lastTime });
-      lastTime = lastTime + 1000;
-    }
-    return output;
-  };
-
-  var globalData1;
-  var globalData2;
-  var dataIntervals1 = 1;
-
-  // plot the original data by retrieving everything from time 0
-  data1 = GenData1(100, lastUpdateTime1);
-
-  data2 = GenData2(200, lastUpdateTime2);
-
-  lastUpdateTime1 = data1[data1.length - 1].timestamp;
-  lastUpdateTime2 = data2[data2.length - 1].timestamp;
-
-  globalData1 = data1;
-  globalData2 = data2;
-
-  var margin1 = { top: 0, right: 20, bottom: 0, left: 30 },
-    width1 = 480 - margin1.left - margin1.right,
-    height1 = 100 - margin1.top - margin1.bottom;
-
-  var x = d3.time.scale().range([0, width1]);
-
-  var y = d3.scale.linear().range([height1, 0]);
-
-  x.domain(
-    d3.extent(globalData2, function(d) {
-      return d.timestamp;
-    })
-  );
-  y.domain(
-    d3.extent(globalData2, function(d) {
-      return d.value;
-    })
-  );
-
-  x.domain(
-    d3.extent(globalData1, function(d) {
-      return d.timestamp;
-    })
-  );
-  y.domain(
-    d3.extent(globalData1, function(d) {
-      return d.value;
-    })
-  );
-
-  var valueline2 = d3.svg
-    .line()
-    .x(function(d) {
-      return x(d.timestamp);
-    })
-    .y(function(d) {
-      return y(d.value);
-    });
-
-  var valueline1 = d3.svg
-    .line()
-    .x(function(d) {
-      return x(d.timestamp);
-    })
-    .y(function(d) {
-      return y(d.value);
-    });
-
-  var svg1 = d3
-    .select(".audio-series-graph")
-    .append("svg")
-    .attr("width", width1 + margin1.left + margin1.right)
-    .attr("height", height1 + margin1.top + margin1.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin1.left + "," + margin1.top + ")");
-
-  var chartBody1 = svg1.append("g");
-
-  chartBody1
-    .append("path") // Add the valueline path
-    .datum(globalData1)
-    .attr("class", "line")
-    .attr("d", valueline1);
-
-  //rahul
-
-  var svg2 = d3
-    .select(".av-audio-series-graph")
-    .append("svg")
-    .attr("width", width1 + margin1.left + margin1.right)
-    .attr("height", height1 + margin1.top + margin1.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin1.left + "," + margin1.top + ")");
-
-  var chartBody2 = svg2.append("g");
-
-  chartBody2
-    .append("path") // Add the valueline path
-    .datum(globalData1)
-    .attr("class", "av-line")
-    .attr("d", valueline1);
-
-  var svg3 = d3
-    .select(".av-video-series-graph")
-    .append("svg")
-    .attr("width", width1 + margin1.left + margin1.right)
-    .attr("height", height1 + margin1.top + margin1.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin1.left + "," + margin1.top + ")");
-
-  var chartBody3 = svg3.append("g");
-
-  chartBody3
-    .append("path") // Add the valueline path
-    .datum(globalData2)
-    .attr("class", "av-line1")
-    .attr("d", valueline2);
-
-  //var panMeasure = 0;
-  var oldScale1 = 1;
-  var globalOffset1 = 0;
-  var globalOffset2 = 0;
-  var panOffset1 = 0;
-  var panOffset2 = 0;
-
-  //////////////////////////////////////////////////////////////
-
-  var N1 = 100;
-  //var dx = 0;
-  function updateData1() {
-    var newData = GenData1(N1, lastUpdateTime1);
-    var newData2 = GenData2(N1, lastUpdateTime1);
-
-    lastUpdateTime1 = newData[newData.length - 1].timestamp;
-    lastUpdateTime2 = newData2[newData2.length - 1].timestamp;
-
-    for (var i = 0; i < newData.length; i++) {
-      globalData1.push(newData[i]);
-    }
-    for (var i = 0; i < newData2.length; i++) {
-      globalData2.push(newData2[i]);
-    }
-    //console.log(globalOffset);
-    globalOffset1 += newData.length;
-    globalOffset2 += newData2.length;
-
-    refreshData1();
-    refreshData2();
-  }
-
-  function refreshData2() {
-    var offset2 = Math.max(0, globalOffset2 + panOffset2);
-
-    var graphData = globalData2.slice(offset2, offset2 + 100);
-
-    x.domain(
-      d3.extent(graphData, function(d) {
-        return d.timestamp;
-      })
-    );
-    //svg.select(".x.axis").call(xAxis1);
-
-    x1 = graphData[0].timestamp;
-    x2 = graphData[graphData.length - 1].timestamp;
-    //dx = (x(x1) - x(x2)); // dx needs to be cummulative
-
-    d3.select(".av-line1")
-      .datum(graphData)
-      .attr("class", "av-line1")
-      .attr("d", valueline2(graphData))
-      .attr("stroke", "#ed7d31")
-      .attr("stroke-width", "2")
-      .attr("fill", "none");
-  }
-
-  function refreshData1() {
-    var offset = Math.max(0, globalOffset1 + panOffset1);
-
-    var graphData = globalData1.slice(offset, offset + 100);
-
-    x.domain(
-      d3.extent(graphData, function(d) {
-        return d.timestamp;
-      })
-    );
-    //svg.select(".x.axis").call(xAxis1);
-
-    x1 = graphData[0].timestamp;
-    x2 = graphData[graphData.length - 1].timestamp;
-    //dx = (x(x1) - x(x2)); // dx needs to be cummulative
-
-    d3.select(".line")
-      .datum(graphData)
-      .attr("class", "line")
-      .attr("d", valueline1(graphData))
-      .attr("stroke", "#404040")
-      .attr("stroke-width", "2")
-      .attr("fill", "none");
-
-    d3.select(".av-line")
-      .datum(graphData)
-      .attr("class", "av-line")
-      .attr("d", valueline1(graphData))
-      .attr("stroke", "#404040")
-      .attr("stroke-width", "2")
-      .attr("fill", "none");
-  }
+ 
+ 
 });
 
 function onTrackedVideoFrame(currentTime, duration) {
