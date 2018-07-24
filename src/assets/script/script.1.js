@@ -159,7 +159,7 @@ $(document).ready(function() {
     oldlady_video1.pause();
     $(".distree-audio-chart-img").show();
     playaudio();
-    // addItemOnTheReport(configuration[element[10]], element[10]);
+    //addItemOnTheReport(configuration[element[10]], element[10]);
     $(".observer-text")
       .html("Distress Observed")
       .addClass("red-color");
@@ -516,6 +516,8 @@ $(document).ready(function() {
           click_action: "Immediate Attention"
         };
         distressObserver(element[4], element[5], element[9]);
+		addItemOnTheReport(configuration[element[10]], element[10]);
+
         //console.log("START > > > > CurrentTime :" + currentTime + " Started blink element[2] " + element[2] + " for element : " + index + " start time " + element[0]);
       }
       if (
@@ -527,7 +529,7 @@ $(document).ready(function() {
         element[3] = false;
         distressNotObserver(element[4], element[5]);
 
-        addItemOnTheReport(configuration[element[10]], element[10]);
+        //addItemOnTheReport(configuration[element[10]], element[10]);
 
         //distress.splice(index, 1);
         //console.log("STOP > > > > CurrentTime :" + currentTime + " Stoped blink " + element[3] + " for element : " + index + " stop time " + element[1]);
