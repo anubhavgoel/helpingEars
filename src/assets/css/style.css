@@ -395,7 +395,7 @@ rect {
   animation: blinker 0.3s infinite;
 }
 .left-container {
-  min-height: 630px;
+  min-height: 530px;
   /* background-color: #eee;*/
   margin-top: 30px;
   max-width: 242px;
