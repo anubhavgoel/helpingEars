@@ -1,3 +1,57 @@
+//========================================== audio frequency code
+
+function preload() {
+  sound = loadSound("assets/audio/final_audio.mp3");
+}
+
+function setup() {
+  var cnv = createCanvas(440, 150);
+  cnv.mouseClicked(togglePlay);
+  cnv.parent("canvabox");
+  fft = new p5.FFT();
+  sound.amp(0.9);
+  //document.getElementById("canvabox").appendChild(cnv);
+  //var svg2 = d3.select(".av-audio-series-graph").append(cnv);
+}
+
+function draw() {
+  background(255);
+
+  var spectrum = fft.analyze();
+  noStroke();
+  fill(0, 0, 0); // spectrum is green
+  for (var i = 0; i < spectrum.length; i++) {
+    var x = map(i, 0, spectrum.length, 0, width);
+    var h = -height + map(spectrum[i], 0, 255, height, 0);
+    rect(x, height, width / spectrum.length, h);
+  }
+
+  var waveform = fft.waveform();
+  noFill();
+  beginShape();
+  stroke(255, 0, 0); // waveform is red
+  strokeWeight(1);
+  for (var i = 0; i < waveform.length; i++) {
+    var x = map(i, 0, waveform.length, 0, width);
+    var y = map(waveform[i], -1, 1, 0, height);
+    vertex(x, y);
+  }
+  endShape();
+
+  //text("click to play/pause", 4, 10);
+}
+
+// fade sound if mouse is over canvas
+function togglePlay() {
+  if (sound.isPlaying()) {
+    sound.pause();
+  } else {
+    sound.loop();
+  }
+}
+
+//======================================== audi frequency code end
+
 $(document).ready(function() {
   $(".dropdown-toggle").dropdown();
   /*----------binding data into dropdown option click------------*/
@@ -19,6 +73,7 @@ $(document).ready(function() {
 
   $(".play-button").on("click", function() {
     oldlady_video.play();
+    togglePlay();
     //oldlady_audio.play();
     clearInterval(inter);
     inter = setInterval(function() {
@@ -46,6 +101,7 @@ $(document).ready(function() {
   });
   $(".pause-button").on("click", function() {
     oldlady_video.pause();
+    togglePlay();
     //oldlady_audio.play();
     clearInterval(inter);
 
@@ -184,7 +240,7 @@ $(document).ready(function() {
       true,
       true,
       true,
-      "./assets/images/Major_Destess.png",
+      "https://firebasestorage.googleapis.com/v0/b/helping-ears.appspot.com/o/1.png?alt=media&token=556d3b21-273e-4fd3-819e-723d97b9bc16",
       "8AM",
       "Living Room",
       "",
@@ -197,7 +253,7 @@ $(document).ready(function() {
       true,
       true,
       true,
-      "./assets/images/Major_Destress1.png",
+      "https://firebasestorage.googleapis.com/v0/b/helping-ears.appspot.com/o/2.png?alt=media&token=3301bc5b-50e9-45a2-b5ea-a3c9b2f47c52",
       "12AM",
       "",
       "",
@@ -210,7 +266,7 @@ $(document).ready(function() {
       true,
       true,
       true,
-      "./assets/images/Minor_Destress.png",
+      "https://firebasestorage.googleapis.com/v0/b/helping-ears.appspot.com/o/3.png?alt=media&token=514fdd6f-dfea-4a79-a693-38855744c562",
       "1AM",
       "Living Room",
       "",
@@ -223,7 +279,7 @@ $(document).ready(function() {
       true,
       true,
       true,
-      "./assets/images/Minor_Distress.png",
+      "https://firebasestorage.googleapis.com/v0/b/helping-ears.appspot.com/o/4.png?alt=media&token=acf22790-ddb7-4594-a28b-9bd698ac0e22",
       "4AM",
       "Living Room",
       "",
@@ -232,6 +288,11 @@ $(document).ready(function() {
   ];
 
   function distressObserver(video, audio, msg) {
+    var oldlady_video1 = document.getElementById("oldlady_video");
+    oldlady_video1.pause();
+
+    togglePlay();
+    addItemOnTheReport(configuration[element[10]], element[10]);
     $(".observer-text")
       .html("Distress Observed")
       .addClass("red-color");
@@ -413,6 +474,7 @@ $(document).ready(function() {
     }
   ];
   function addItemOnTheReport(configuration, index) {
+    addNotificationInChart(configuration, index);
     $(".left-container").append(`<div>
                                       <a href="javascript:void(0)"  data-target="#${index}"> ${configuration.reportTitle} </a>
                                  </div>`);
@@ -576,7 +638,7 @@ $(document).ready(function() {
         //stop the blink
         element[3] = false;
         distressNotObserver(element[4], element[5]);
-        addItemOnTheReport(configuration[element[10]], element[10]);
+
         //distress.splice(index, 1);
         //console.log("STOP > > > > CurrentTime :" + currentTime + " Stoped blink " + element[3] + " for element : " + index + " stop time " + element[1]);
       }
@@ -813,4 +875,40 @@ $(document).ready(function() {
 function onTrackedVideoFrame(currentTime, duration) {
   $("#current").text(currentTime); //Change #current to currentTime
   $("#duration").text(duration);
+}
+//==================================== Notification in chart window
+
+function addNotificationInChart(configuration, index) {
+  var notificationTemplate = "";
+  $(".notification-data").append(`<div id="${index +
+    "chart"}" class="col-md-12">
+  <div class="row">
+      <div class="col-md-12">
+          <div class="report-title1">IN - ${configuration.reportTitle} | ${
+    configuration.time
+  }</div> 
+          
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-12 report-main-container1">
+          <div class="col-md-2 report-padding1">
+          <div class="report-text-container1">
+          <span class="report-label1">Event type-</span>
+          <span>${configuration.category}</span>
+      </div>
+              <div class="report-text-container1">
+                  <span class="report-label1">Category – </span>
+                  <span>${configuration.eventType}</span>
+              </div>
+             
+              <div class="report-text-container1">
+                  <span class="report-label1">Accuracy –</span>
+                  <span>${configuration.accuracy}</span>
+              </div>
+              
+          </div>
+          
+      </div>
+  </div>`);
 }

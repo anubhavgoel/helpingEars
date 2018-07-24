@@ -104,9 +104,11 @@
             <div class="col-md-5">
               <div class="video-text">Audio</div>
               <div class="audio">
-                <div class="blink-box"></div>
+                <!-- <div class="blink-box"></div> -->
                 <div class="audio-area">
-                  <div class="audio-series-graph"></div>
+                  <div class="audio-series-graph" style="display: none;"></div>
+                  <div id="canvabox"></div>
+                  <!-- <div class="audio-series-graph"></div> -->
                   <div class="audio-distress"></div>
                   <!--<audio controls id="oldlady_audio">
                                       <source src="audio/girl_agony1_sound.ogg" type="audio/ogg">
@@ -119,19 +121,22 @@
                   <span style="margin-left:3px;font-size: 22px;">55%</span>
                 </div>
               </div>
-              <div class="video-text" style="margin-top: 10px;">Activity
-                <span style="color: #9B9B9B; font-size: 13px; font-weight: normal">(Last 60 Min)</span>
+              <div class="video-text" style="margin-top: 10px;">Last Event
+                <span style="color: #9B9B9B; font-size: 13px; font-weight: normal"></span>
               </div>
               <div class="activity">
-                <div class="blink-box"></div>
+                <!-- <div class="blink-box"></div> -->
 
                 <div class="audio-video">
 
                   <div class="audio-area">
-                    <div class="av-audio-series-graph"></div>
+                    <div class="av-audio-series-graph" style="display: none"></div>
                     <br>
                     <br>
-                    <div class="av-video-series-graph"></div>
+                    <div class="av-video-series-graph" style="display: none"></div>
+                    <div class="notification-data">
+
+                    </div>
                     <div class="audio-distress"></div>
                     <!--<audio controls id="oldlady_audio">
                           <source src="audio/girl_agony1_sound.ogg" type="audio/ogg">
