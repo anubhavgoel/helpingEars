@@ -9,7 +9,7 @@ function setup() {
   cnv.mouseClicked(togglePlay);
   cnv.parent("canvabox");
   fft = new p5.FFT();
-  sound.amp(0.9);
+  sound.amp(20);
   //document.getElementById("canvabox").appendChild(cnv);
   //var svg2 = d3.select(".av-audio-series-graph").append(cnv);
 }
@@ -32,7 +32,7 @@ function draw() {
   stroke(255, 0, 0); // waveform is red
   strokeWeight(1);
   for (var i = 0; i < waveform.length; i++) {
-    var x = map(i, 0, waveform.length, 0, width);
+    var x = map(i, 0, waveform.length, 0, width+200);
     var y = map(waveform[i], -1, 1, 0, height);
     vertex(x, y);
   }
@@ -40,13 +40,17 @@ function draw() {
 
   //text("click to play/pause", 4, 10);
 }
+function playaudio(){
+	$("#defaultCanvas0").trigger("click");
+}
 
 // fade sound if mouse is over canvas
 function togglePlay() {
   if (sound.isPlaying()) {
     sound.pause();
   } else {
-    sound.loop();
+    sound.play();
+	//draw();
   }
 }
 
@@ -73,7 +77,7 @@ $(document).ready(function() {
 
   $(".play-button").on("click", function() {
     oldlady_video.play();
-    togglePlay();
+    playaudio();
     //oldlady_audio.play();
     clearInterval(inter);
     inter = setInterval(function() {
@@ -101,7 +105,7 @@ $(document).ready(function() {
   });
   $(".pause-button").on("click", function() {
     oldlady_video.pause();
-    togglePlay();
+    playaudio();
     //oldlady_audio.play();
     clearInterval(inter);
 
@@ -288,10 +292,10 @@ $(document).ready(function() {
   ];
 
   function distressObserver(video, audio, msg) {
-    var oldlady_video1 = document.getElementById("oldlady_video");
-    oldlady_video1.pause();
+    //var oldlady_video1 = document.getElementById("oldlady_video");
+    //oldlady_video1.pause();
 
-    togglePlay();
+    //playaudio();
    // addItemOnTheReport(configuration[element[10]], element[10]);
     $(".observer-text")
       .html("Distress Observed")
@@ -883,7 +887,7 @@ function onTrackedVideoFrame(currentTime, duration) {
 
 function addNotificationInChart(configuration, index) {
   var notificationTemplate = "";
-  $(".notification-data").append(`<div id="${index +
+  $(".notification-data").html(`<div id="${index +
     "chart"}" class="col-md-12">
   <div class="row">
       <div class="col-md-12">
