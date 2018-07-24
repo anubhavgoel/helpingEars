@@ -101,8 +101,8 @@ $(document).ready(function() {
 
   var distress = [
     [
-      27,
-      34,
+      23,
+      26,
       true,
       true,
       true,
