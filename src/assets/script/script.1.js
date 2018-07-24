@@ -292,7 +292,7 @@ $(document).ready(function() {
     oldlady_video1.pause();
 
     togglePlay();
-    addItemOnTheReport(configuration[element[10]], element[10]);
+   // addItemOnTheReport(configuration[element[10]], element[10]);
     $(".observer-text")
       .html("Distress Observed")
       .addClass("red-color");
@@ -638,6 +638,9 @@ $(document).ready(function() {
         //stop the blink
         element[3] = false;
         distressNotObserver(element[4], element[5]);
+	 
+		addItemOnTheReport(configuration[element[10]], element[10]); 
+ 
 
         //distress.splice(index, 1);
         //console.log("STOP > > > > CurrentTime :" + currentTime + " Stoped blink " + element[3] + " for element : " + index + " stop time " + element[1]);
