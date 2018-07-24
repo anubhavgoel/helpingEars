@@ -1,23 +1,29 @@
 //========================================== audio frequency code
+var fft;
 
 function preload() {
   sound = loadSound("assets/audio/final_audio.mp3");
 }
 
 function setup() {
+  sound = loadSound("assets/audio/final_audio.mp3");		
   var cnv = createCanvas(440, 150);
   cnv.mouseClicked(togglePlay);
   cnv.parent("canvabox");
-  fft = new p5.FFT();
-  sound.amp(20);
+  fft = new p5.FFT()
+  //fft = new p5.Amplitude()
+  sound.amp(100);
   //document.getElementById("canvabox").appendChild(cnv);
   //var svg2 = d3.select(".av-audio-series-graph").append(cnv);
 }
 
 function draw() {
+	debugger;
   background(255);
 
-  var spectrum = fft.analyze();
+ // var spectrum = fft.analyze();
+	var spectrum = fft.analyze();
+  //var spectrum = fft.getEnergy("bass", "lowMid")
   noStroke();
   fill(0, 0, 0); // spectrum is green
   for (var i = 0; i < spectrum.length; i++) {
@@ -72,14 +78,14 @@ $(document).ready(function() {
   });
   var oldlady_video = document.getElementById("oldlady_video");
   var oldlady_audio = document.getElementById("oldlady_audio");
-  var inter;
-  var interaudio;
+  
+  oldlady_video.volume = 0;
 
   /*----------video play button------------*/
 
   $(".play-button").on("click", function() {
     oldlady_video.play();
-    //playaudio();
+    playaudio();
    
     $(".videoaccuracy").hide();
     $(".observer-text")
@@ -90,15 +96,10 @@ $(document).ready(function() {
   });
   $(".pause-button").on("click", function() {
     oldlady_video.pause();
-   // playaudio();
+    playaudio();
    
   });
-  /*----------video end event------------*/
-  oldlady_video.addEventListener("ended", function(e) {
-    //$(".videoaccuracy").show();
-    clearInterval(inter);
-    clearInterval(interaudio);
-  });
+
 
  
   var distress = [
@@ -157,10 +158,10 @@ $(document).ready(function() {
   ];
 
   function distressObserver(video, audio, msg) {
-    //var oldlady_video1 = document.getElementById("oldlady_video");
-    //oldlady_video1.pause();
+    var oldlady_video1 = document.getElementById("oldlady_video");
+    oldlady_video1.pause();
 
-    //playaudio();
+    playaudio();
    // addItemOnTheReport(configuration[element[10]], element[10]);
     $(".observer-text")
       .html("Distress Observed")
@@ -189,12 +190,6 @@ $(document).ready(function() {
     window.dispatchEvent(event);
   }
   function distressNotObserver(video, audio) {
-    //var oldlady_video1 = document.getElementById("oldlady_video");
-
-   
-    //   $(".videoaccuracy").show();
-   
-    //oldlady_video1.pause();
     
     $(".audio-distress").hide();
     $(".blink-box").removeClass("blink");
