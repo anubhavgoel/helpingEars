@@ -6,11 +6,11 @@ function preload() {
 }
 
 function setup() {
-  sound = loadSound("assets/audio/final_audio.mp3");		
+  sound = loadSound("assets/audio/final_audio.mp3");
   var cnv = createCanvas(440, 150);
   cnv.mouseClicked(togglePlay);
   cnv.parent("canvabox");
-  fft = new p5.FFT()
+  fft = new p5.FFT();
   //fft = new p5.Amplitude()
   sound.amp(100);
   //document.getElementById("canvabox").appendChild(cnv);
@@ -18,11 +18,11 @@ function setup() {
 }
 
 function draw() {
-	debugger;
+  //debugger;
   background(255);
 
- // var spectrum = fft.analyze();
-	var spectrum = fft.analyze();
+  // var spectrum = fft.analyze();
+  var spectrum = fft.analyze();
   //var spectrum = fft.getEnergy("bass", "lowMid")
   noStroke();
   fill(0, 0, 0); // spectrum is green
@@ -38,7 +38,7 @@ function draw() {
   stroke(255, 0, 0); // waveform is red
   strokeWeight(1);
   for (var i = 0; i < waveform.length; i++) {
-    var x = map(i, 0, waveform.length, 0, width+200);
+    var x = map(i, 0, waveform.length, 0, width + 200);
     var y = map(waveform[i], -1, 1, 0, height);
     vertex(x, y);
   }
@@ -46,19 +46,19 @@ function draw() {
 
   //text("click to play/pause", 4, 10);
 }
-function playaudio(){
-	$("#defaultCanvas0").trigger("click");
+function playaudio() {
+  $("#defaultCanvas0").trigger("click");
 }
 
 // fade sound if mouse is over canvas
 function togglePlay() {
   if (sound.isPlaying()) {
     sound.pause();
-	 //document.getElementById("oldlady_video").pause();
+    //document.getElementById("oldlady_video").pause();
   } else {
     sound.play();
-	// document.getElementById("oldlady_video").play();
-	//draw();
+    // document.getElementById("oldlady_video").play();
+    //draw();
   }
 }
 
@@ -78,30 +78,27 @@ $(document).ready(function() {
   });
   var oldlady_video = document.getElementById("oldlady_video");
   var oldlady_audio = document.getElementById("oldlady_audio");
-  
+
   oldlady_video.volume = 0;
 
   /*----------video play button------------*/
 
   $(".play-button").on("click", function() {
     oldlady_video.play();
+    $(".distree-audio-chart-img").hide();
     playaudio();
-   
+
     $(".videoaccuracy").hide();
     $(".observer-text")
       .html("Everything Looks Good")
       .removeClass("red-color");
     $(".observer-bar").removeClass("red-backgroundcolor");
-   
   });
   $(".pause-button").on("click", function() {
     oldlady_video.pause();
     playaudio();
-   
   });
 
-
- 
   var distress = [
     [
       27,
@@ -160,9 +157,9 @@ $(document).ready(function() {
   function distressObserver(video, audio, msg) {
     var oldlady_video1 = document.getElementById("oldlady_video");
     oldlady_video1.pause();
-
+    $(".distree-audio-chart-img").show();
     playaudio();
-   // addItemOnTheReport(configuration[element[10]], element[10]);
+    // addItemOnTheReport(configuration[element[10]], element[10]);
     $(".observer-text")
       .html("Distress Observed")
       .addClass("red-color");
@@ -190,7 +187,6 @@ $(document).ready(function() {
     window.dispatchEvent(event);
   }
   function distressNotObserver(video, audio) {
-    
     $(".audio-distress").hide();
     $(".blink-box").removeClass("blink");
     //$(".audio-area").removeClass("blink");
@@ -232,7 +228,8 @@ $(document).ready(function() {
       accuracy: "80%",
       date: curDate(),
       time: timeNow(),
-      imageURL:   "https://firebasestorage.googleapis.com/v0/b/helping-ears.appspot.com/o/1.png?alt=media&token=556d3b21-273e-4fd3-819e-723d97b9bc16",
+      imageURL:
+        "https://firebasestorage.googleapis.com/v0/b/helping-ears.appspot.com/o/1.png?alt=media&token=556d3b21-273e-4fd3-819e-723d97b9bc16",
       notifications: [
         {
           level: "Level 3",
@@ -266,7 +263,8 @@ $(document).ready(function() {
       accuracy: "80%",
       date: curDate(),
       time: timeNow(),
-      imageURL:"https://firebasestorage.googleapis.com/v0/b/helping-ears.appspot.com/o/2.png?alt=media&token=3301bc5b-50e9-45a2-b5ea-a3c9b2f47c52",
+      imageURL:
+        "https://firebasestorage.googleapis.com/v0/b/helping-ears.appspot.com/o/2.png?alt=media&token=3301bc5b-50e9-45a2-b5ea-a3c9b2f47c52",
       notifications: [
         {
           level: "Level 3",
@@ -300,7 +298,8 @@ $(document).ready(function() {
       accuracy: "80%",
       date: curDate(),
       time: timeNow(),
-      imageURL:  "https://firebasestorage.googleapis.com/v0/b/helping-ears.appspot.com/o/3.png?alt=media&token=514fdd6f-dfea-4a79-a693-38855744c562",
+      imageURL:
+        "https://firebasestorage.googleapis.com/v0/b/helping-ears.appspot.com/o/3.png?alt=media&token=514fdd6f-dfea-4a79-a693-38855744c562",
       notifications: [
         {
           level: "Level 2",
@@ -326,7 +325,7 @@ $(document).ready(function() {
         }
       ]
     },
-	{
+    {
       reportTitle: "Fall in Common Room " + curDate(),
       roomNo: "Common Room",
       eventType: "Level 2",
@@ -334,7 +333,8 @@ $(document).ready(function() {
       accuracy: "80%",
       date: curDate(),
       time: timeNow(),
-      imageURL:"https://firebasestorage.googleapis.com/v0/b/helping-ears.appspot.com/o/4.png?alt=media&token=acf22790-ddb7-4594-a28b-9bd698ac0e22",
+      imageURL:
+        "https://firebasestorage.googleapis.com/v0/b/helping-ears.appspot.com/o/4.png?alt=media&token=acf22790-ddb7-4594-a28b-9bd698ac0e22",
       notifications: [
         {
           level: "Level 2",
@@ -526,9 +526,8 @@ $(document).ready(function() {
         //stop the blink
         element[3] = false;
         distressNotObserver(element[4], element[5]);
-	 
-		addItemOnTheReport(configuration[element[10]], element[10]); 
- 
+
+        addItemOnTheReport(configuration[element[10]], element[10]);
 
         //distress.splice(index, 1);
         //console.log("STOP > > > > CurrentTime :" + currentTime + " Stoped blink " + element[3] + " for element : " + index + " stop time " + element[1]);
@@ -537,8 +536,6 @@ $(document).ready(function() {
   }
   $("#oldlady_video").on("timeupdate", onTimeUpdate);
   /*-------------------- drawing audio graph--------------------*/
- 
- 
 });
 
 function onTrackedVideoFrame(currentTime, duration) {
@@ -549,8 +546,7 @@ function onTrackedVideoFrame(currentTime, duration) {
 
 function addNotificationInChart(configuration, index) {
   var notificationTemplate = "";
-  $(".notification-data").html(`<div id="${index +
-    "chart"}" class="col-md-12">
+  $(".notification-data").html(`<div id="${index + "chart"}" class="col-md-12">
   <div class="row">
       <div class="col-md-12">
           <div class="report-title1">IN - ${configuration.reportTitle} | ${
